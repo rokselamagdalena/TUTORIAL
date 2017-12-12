@@ -4,6 +4,13 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+    state = {
+      persons: [
+          {name: 'Max', age: 28},
+          {name: 'Susi', age: 17}
+      ]
+    }
+
   render() { //render sth to the screen
     return (
 
@@ -12,8 +19,9 @@ class App extends Component {
       <div className="App">
        <h1>Hi, I'm a React App</h1>
           <p>I hope to have fun</p>
-          <Person name="Max" age="26">My hobbies is: Racing</Person>
-          <Person name="Susie" age="17"/>
+          <button>Switch Name</button>
+          <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>My hobbies is: Racing</Person>
+          <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
       </div>
     );
     //this is compiled into this code
