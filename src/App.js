@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //React is reposible for rendering everthing to thr DOM
 import './App.css';
+import Person from './Person/Person';
 
 class App extends Component {
   render() { //render sth to the screen
@@ -11,6 +12,8 @@ class App extends Component {
       <div className="App">
        <h1>Hi, I'm a React App</h1>
           <p>I hope to have fun</p>
+          <Person/>
+          <Person/>
       </div>
     );
     //this is compiled into this code
