@@ -11,8 +11,14 @@ class App extends Component {
       persons: [
           {name: 'Max', age: 28},
           {name: 'Susi', age: 17}
-      ]
+      ],
+        showPersons: false
 
+    };
+
+    tooglePersonHandler = () => {
+        const doesShow = this.state.showPersons;
+        this.setState({showPersons: !doesShow});
     };
 
     switchNameHandler = (newName) => {
@@ -55,16 +61,21 @@ class App extends Component {
       <div className="App">
        <h1>Hi, I'm a React App</h1>
           <p>I hope to have fun</p>
-          <button style={style} onClick={() => this.switchNameHandler('Adri')}>Switch Name</button>
-          <Person
-              name={this.state.persons[0].name} age={this.state.persons[0].age} changed={this.nameChangedHandler} click={this.switchNameHandler.bind(this, 'Magda!')}
-          >My hobbies is: Racing</Person>
-          <Person
-              name={this.state.persons[1].name} age={this.state.persons[1].age} changed={this.nameChangedHandler}
-          />
-          <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
-          <UserOutput  userName={this.state.username}/>
-          <UserOutput  userName="Madzia"/>
+          <button style={style} onClick={this.tooglePersonHandler}>Switch Name</button>
+          { this.state.showPersons ?
+              <div >
+                  <Person
+                      name={this.state.persons[0].name} age={this.state.persons[0].age} changed={this.nameChangedHandler} click={this.switchNameHandler.bind(this, 'Magda!')}
+                  >My hobbies is: Racing</Person>
+                  <Person
+                      name={this.state.persons[1].name} age={this.state.persons[1].age} changed={this.nameChangedHandler}
+                  />
+                  <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
+                  <UserOutput  userName={this.state.username}/>
+                  <UserOutput  userName="Madzia"/>
+              </div> : null
+          }
+
       </div>
     );
     //this is compiled into this code
