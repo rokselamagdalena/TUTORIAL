@@ -21,7 +21,25 @@ class App extends Component {
         ]})
     }
 
+    nameChangedHandler = (event) => {
+        this.setState({
+            persons: [
+                {name: event.target.value, age: 28},
+                {name: 'Susi', age: 27}
+            ]
+        })
+    }
+
   render() { //render sth to the screen
+
+      const style = {
+        backgroundColor: 'white',
+        font: 'inherit',
+        border: '1px solid blue',
+        padding: '8px',
+        cursor: 'pointer'
+      };
+
     return (
 
       //this is JSX it will be transpiled to Javascript
@@ -29,12 +47,12 @@ class App extends Component {
       <div className="App">
        <h1>Hi, I'm a React App</h1>
           <p>I hope to have fun</p>
-          <button onClick={() => this.switchNameHandler('Adri')}>Switch Name</button>
+          <button style={style} onClick={() => this.switchNameHandler('Adri')}>Switch Name</button>
           <Person
-              name={this.state.persons[0].name} age={this.state.persons[0].age} click={this.switchNameHandler.bind(this, 'Magda!')}
+              name={this.state.persons[0].name} age={this.state.persons[0].age} changed={this.nameChangedHandler} click={this.switchNameHandler.bind(this, 'Magda!')}
           >My hobbies is: Racing</Person>
           <Person
-              name={this.state.persons[1].name} age={this.state.persons[1].age}
+              name={this.state.persons[1].name} age={this.state.persons[1].age} changed={this.nameChangedHandler}
           />
       </div>
     );
