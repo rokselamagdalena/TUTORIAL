@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 //React is reposible for rendering everthing to thr DOM
 import './App.css';
 import Person from './Person/Person';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
     state = {
+        username: 'Adri',
       persons: [
           {name: 'Max', age: 28},
           {name: 'Susi', age: 17}
-      ],
-        otherState: 'some other value'
-    }
+      ]
+
+    };
 
     switchNameHandler = (newName) => {
         console.log('Was clickedd!');
@@ -19,7 +22,12 @@ class App extends Component {
                 {name: newName, age: 28},
                 {name: 'Susi', age: 27}
         ]})
-    }
+    };
+
+    usernameChangedHandler = (event) => {
+        this.setState({username: event.target.value})
+
+    };
 
     nameChangedHandler = (event) => {
         this.setState({
@@ -28,7 +36,7 @@ class App extends Component {
                 {name: 'Susi', age: 27}
             ]
         })
-    }
+    };
 
   render() { //render sth to the screen
 
@@ -54,6 +62,9 @@ class App extends Component {
           <Person
               name={this.state.persons[1].name} age={this.state.persons[1].age} changed={this.nameChangedHandler}
           />
+          <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
+          <UserOutput  userName={this.state.username}/>
+          <UserOutput  userName="Madzia"/>
       </div>
     );
     //this is compiled into this code
