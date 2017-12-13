@@ -44,7 +44,7 @@ class App extends Component {
         })
     };
 
-  render() { //render sth to the screen
+  render() { //render sth to the screen, everything is rendered when react render view
 
       const style = {
         backgroundColor: 'white',
@@ -54,15 +54,10 @@ class App extends Component {
         cursor: 'pointer'
       };
 
-    return (
+      let persons = null;
 
-      //this is JSX it will be transpiled to Javascript
-        //to add css style we add atribute className (class is reserved for Javascript)
-      <div className="App">
-       <h1>Hi, I'm a React App</h1>
-          <p>I hope to have fun</p>
-          <button style={style} onClick={this.tooglePersonHandler}>Switch Name</button>
-          { this.state.showPersons ?
+      if(this.state.showPersons) {
+          persons = (
               <div >
                   <Person
                       name={this.state.persons[0].name} age={this.state.persons[0].age} changed={this.nameChangedHandler} click={this.switchNameHandler.bind(this, 'Magda!')}
@@ -73,8 +68,19 @@ class App extends Component {
                   <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
                   <UserOutput  userName={this.state.username}/>
                   <UserOutput  userName="Madzia"/>
-              </div> : null
-          }
+              </div>
+          );
+      }
+
+    return (
+
+      //this is JSX it will be transpiled to Javascript
+        //to add css style we add atribute className (class is reserved for Javascript)
+      <div className="App">
+       <h1>Hi, I'm a React App</h1>
+          <p>I hope to have fun</p>
+          <button style={style} onClick={this.tooglePersonHandler}>Switch Name</button>
+          {persons}
 
       </div>
     );
