@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //React is reposible for rendering everthing to thr DOM
-import './App.css';
+import classes  from  './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
@@ -115,14 +115,14 @@ class App extends Component {
           style.backgroundColor = 'red';
       }
 
-      let classes = [];
+      let assignedClasses = [];
 
       if(this.state.persons.length < 2) {
-          classes.push('red');
+          assignedClasses.push(classes.red);
       }
 
       if(this.state.persons.length === 2) {
-          classes.push('bold');
+          assignedClasses.push(classes.bold);
       }
 
     return (
@@ -130,9 +130,9 @@ class App extends Component {
 
       //this is JSX it will be transpiled to Javascript
         //to add css style we add atribute className (class is reserved for Javascript)
-      <div className="App">
+      <div className={classes.App}>
        <h1>Hi, I'm a React App</h1>
-          <p className={classes.join(' ')}>I hope to have fun</p>
+          <p className={assignedClasses.join(' ')}>I hope to have fun</p>
           <button style={style} onClick={this.tooglePersonHandler}>Switch Name</button>
           {persons}
           <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
