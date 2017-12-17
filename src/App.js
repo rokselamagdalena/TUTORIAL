@@ -87,7 +87,7 @@ class App extends Component {
     render() { //render sth to the screen, everything is rendered when react render view
 
       const style = {
-        backgroundColor: 'white',
+        backgroundColor: 'green',
         font: 'inherit',
         border: '1px solid blue',
         padding: '8px',
@@ -111,15 +111,28 @@ class App extends Component {
                   })}
               </div>
           );
+
+          style.backgroundColor = 'red';
+      }
+
+      let classes = [];
+
+      if(this.state.persons.length < 2) {
+          classes.push('red');
+      }
+
+      if(this.state.persons.length === 2) {
+          classes.push('bold');
       }
 
     return (
+
 
       //this is JSX it will be transpiled to Javascript
         //to add css style we add atribute className (class is reserved for Javascript)
       <div className="App">
        <h1>Hi, I'm a React App</h1>
-          <p>I hope to have fun</p>
+          <p className={classes.join(' ')}>I hope to have fun</p>
           <button style={style} onClick={this.tooglePersonHandler}>Switch Name</button>
           {persons}
           <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
