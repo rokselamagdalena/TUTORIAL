@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 //React is reposible for rendering everthing to thr DOM
 import classes  from  './App.css';
-import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
-import Validation from './Validation/Validation';
-import Char from './Char/Char'
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Person from '../components/Persons/Person/Person';
+import UserInput from '../components/UserInput/UserInput';
+import UserOutput from '../components/UserOutput/UserOutput';
+import Validation from '../components/Validation/Validation';
+import Char from '../components/Char/Char'
 
 class App extends Component {
     state = {
@@ -100,10 +99,9 @@ class App extends Component {
           persons = (
               <div >
                   {this.state.persons.map((person, index) => {
-                      return <ErrorBoundary key={person.key}> <Person name={person.name} age={person.age}
+                      return <Person name={person.name} age={person.age}  key={person.key}
                                      click={() => this.deletePersonHandler(index)} changed={(event) => this.nameChangedHandle(event, person.id)}
                                      />
-                            </ErrorBoundary>
                   })}
               </div>
           );
