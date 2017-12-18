@@ -6,6 +6,7 @@ import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
 import Validation from './Validation/Validation';
 import Char from './Char/Char'
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
     state = {
@@ -99,9 +100,10 @@ class App extends Component {
           persons = (
               <div >
                   {this.state.persons.map((person, index) => {
-                      return <Person key={person.key} name={person.name} age={person.age}
+                      return <ErrorBoundary key={person.key}> <Person name={person.name} age={person.age}
                                      click={() => this.deletePersonHandler(index)} changed={(event) => this.nameChangedHandle(event, person.id)}
-                      />
+                                     />
+                            </ErrorBoundary>
                   })}
               </div>
           );
