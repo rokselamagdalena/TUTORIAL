@@ -86,13 +86,6 @@ class App extends Component {
 
     render() { //render sth to the screen, everything is rendered when react render view
 
-      const style = {
-        backgroundColor: 'green',
-        font: 'inherit',
-        border: '1px solid blue',
-        padding: '8px',
-        cursor: 'pointer'
-      };
 
       const charList = this.state.userInput.split(' ,').map((ch, index) => {
           return <Char character={ch} key={index} clicked={() => this.deleteCharHandler(index)}/>
@@ -100,6 +93,7 @@ class App extends Component {
 
 
       let persons = null;
+        let btnClass = '';
 
       if(this.state.showPersons) {
           persons = (
@@ -111,8 +105,7 @@ class App extends Component {
                   })}
               </div>
           );
-
-          style.backgroundColor = 'red';
+        btnClass = classes.Red;
       }
 
       let assignedClasses = [];
@@ -133,7 +126,7 @@ class App extends Component {
       <div className={classes.App}>
        <h1>Hi, I'm a React App</h1>
           <p className={assignedClasses.join(' ')}>I hope to have fun</p>
-          <button style={style} onClick={this.tooglePersonHandler}>Switch Name</button>
+          <button className={btnClass} onClick={this.tooglePersonHandler}>Switch Name</button>
           {persons}
           <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
           <UserOutput  userName={this.state.username}/>
