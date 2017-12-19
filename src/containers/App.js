@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 //React is reposible for rendering everthing to thr DOM
 import classes  from  './App.css';
-import Person from '../components/Persons/Person/Person';
 import UserInput from '../components/UserInput/UserInput';
 import UserOutput from '../components/UserOutput/UserOutput';
 import Validation from '../components/Validation/Validation';
 import Char from '../components/Char/Char'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
     state = {
@@ -34,9 +35,7 @@ class App extends Component {
 
     deletePersonHandler = (personIndex) => {
 
-
         const persons = [...this.state.persons]; //or const persons = this.state.persons.slice()
-
         // const persons = this.state.persons; //it was a pointer
         persons.splice(personIndex, 1);
         this.setState({persons: persons});
@@ -93,29 +92,11 @@ class App extends Component {
 
 
       let persons = null;
-        let btnClass = '';
 
       if(this.state.showPersons) {
           persons = (
-              <div >
-                  {this.state.persons.map((person, index) => {
-                      return <Person name={person.name} age={person.age}  key={person.key}
-                                     click={() => this.deletePersonHandler(index)} changed={(event) => this.nameChangedHandle(event, person.id)}
-                                     />
-                  })}
-              </div>
+              <Persons persons={this.state.persons} clicked={this.deletePersonHandler} changed={this.nameChangedHandle}/>
           );
-        btnClass = classes.Red;
-      }
-
-      let assignedClasses = [];
-
-      if(this.state.persons.length < 2) {
-          assignedClasses.push(classes.red);
-      }
-
-      if(this.state.persons.length === 2) {
-          assignedClasses.push(classes.bold);
       }
 
     return (
@@ -124,9 +105,7 @@ class App extends Component {
       //this is JSX it will be transpiled to Javascript
         //to add css style we add atribute className (class is reserved for Javascript)
       <div className={classes.App}>
-       <h1>Hi, I'm a React App</h1>
-          <p className={assignedClasses.join(' ')}>I hope to have fun</p>
-          <button className={btnClass} onClick={this.tooglePersonHandler}>Switch Name</button>
+          <Cockpit appTitle={this.props.title} showPersons={this.state.showPersons} persons={this.state.persons} clicked={this.tooglePersonHandler}/>
           {persons}
           <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
           <UserOutput  userName={this.state.username}/>
@@ -143,8 +122,6 @@ class App extends Component {
       </div>
 
     );
-    //this is compiled into this code
-    //   return React.createElement('div', {className: 'App',}, React.createElement('h1',null, 'Hi, I\'m a React App' ))
   }
 }
 
