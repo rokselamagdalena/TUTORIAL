@@ -9,16 +9,41 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-    state = {
-        username: 'Adri',
-      persons: [
-          {id: 'a',name: 'Max', age: 28},
-          {id: 'b', name: 'Susi', age: 17}
-      ],
-        showPersons: false,
-        userInput: ''
 
-    };
+    constructor(props) {
+        super(props);
+        console.log('dupka', props)
+        this.state = {
+            username: 'Adri',
+            persons: [
+                {id: 'a',name: 'Max', age: 28},
+                {id: 'b', name: 'Susi', age: 17}
+            ],
+            showPersons: false,
+            userInput: ''
+
+        };
+    }
+
+    componentWillMount() {
+        console.log('dupka2')
+    }
+
+    componentDidMount() {
+        console.log('dupka4x')
+    }
+
+    //
+    // state = {
+    //     username: 'Adri',
+    //   persons: [
+    //       {id: 'a',name: 'Max', age: 28},
+    //       {id: 'b', name: 'Susi', age: 17}
+    //   ],
+    //     showPersons: false,
+    //     userInput: ''
+    //
+    // };
 
     tooglePersonHandler = () => {
         const doesShow = this.state.showPersons;
@@ -85,6 +110,7 @@ class App extends Component {
 
     render() { //render sth to the screen, everything is rendered when react render view
 
+        console.log('dupka3')
 
       const charList = this.state.userInput.split(' ,').map((ch, index) => {
           return <Char character={ch} key={index} clicked={() => this.deleteCharHandler(index)}/>
@@ -105,6 +131,7 @@ class App extends Component {
       //this is JSX it will be transpiled to Javascript
         //to add css style we add atribute className (class is reserved for Javascript)
       <div className={classes.App}>
+          <button onClick={() => {this.setState({showPersons: true})}}>Show Persons</button>
           <Cockpit appTitle={this.props.title} showPersons={this.state.showPersons} persons={this.state.persons} clicked={this.tooglePersonHandler}/>
           {persons}
           <UserInput changed={this.usernameChangedHandler} currentName={this.state.username}/>
